@@ -9,11 +9,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "boxen": "^8.0.1"
-  },
-  "devDependencies": {
-    "eslint": "^9.27.0"
-  }
+  "license": "ISC"
 }
