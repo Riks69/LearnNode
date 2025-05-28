@@ -1,11 +1,12 @@
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import loader from "sass-loader";
 
 export default {
-  entry: './src/index.js',
+  entry: "./src/index.js",
   output: {
-    filename: 'main.js',
-    path: path.resolve(import.meta.dirname, 'dist'),
+    filename: "main.js",
+    path: path.resolve(import.meta.dirname, "dist"),
   },
   devServer: {
     static: {
@@ -23,25 +24,36 @@ export default {
       {
         test: /\.scss$/i,
         use: [
-          "style-loader", 
-          "css-loader", 
+          "style-loader",
+          "css-loader",
           {
-            loader:"sass-loader",
-            options:{
-              sassOptions:{
+            loader: "sass-loader",
+            options: {
+              sassOptions: {
                 quietDeps: true
               }
             }
           }
-          
+        ],
+      },
+      {
+        test: /\.njk$/,
+        use: [
+          {
+            loader: 'simple-nunjucks-loader',
+            options: {},
+          },
         ],
       },
     ],
   },
-
   plugins: [
     new HtmlWebpackPlugin({
-        template: "./src/index.html"
-    })
- ],
+      template: './src/index.njk'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      template: './src/about.njk',
+    }),
+  ],
 };
